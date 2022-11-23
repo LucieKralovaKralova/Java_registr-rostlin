@@ -8,14 +8,14 @@ public class Plant {
     private int frequencyOfWatering;   // Frekvence zálivky ve dnech
 
     // KONSTRUKTORY
-    public Plant(String name, String notes, LocalDate planted, LocalDate watering, int frequencyOfWatering) throws PlantException{
+    public Plant(String name, String notes, int frequencyOfWatering, LocalDate planted, LocalDate watering) throws PlantException{
         this.name = name;
         this.notes = notes;
         this.planted = planted;
         setWatering(watering);
         setFrequencyOfWatering(frequencyOfWatering);
     }
-    public Plant(String name,LocalDate planted, int frequencyOfWatering) throws PlantException{
+    public Plant(String name,int frequencyOfWatering, LocalDate planted) throws PlantException{
         this.name = name;
         this.notes = null;
         this.planted = planted;
@@ -39,7 +39,6 @@ public class Plant {
     }
 
 
-    // VÝCHOZÍ PŘÍSTUPOVÉ METODY
 
     public String getName() {
         return name;
@@ -71,7 +70,7 @@ public class Plant {
 
     public void setWatering(LocalDate watering) throws PlantException {
         if (watering.isBefore(planted)){
-            throw new PlantException("Zadali jste nesprávné datum poslední zálivky nebo datum vysatení rostliny");
+            throw new PlantException("Zadali jste nesprávné datum  - poslední zálivka nemůže být před datumem vysazení rostliny!!!");
         }
         this.watering = watering;
     }
@@ -85,6 +84,16 @@ public class Plant {
 
     public void setFrequencyOfWatering(int frequencyOfWatering) {
         this.frequencyOfWatering = frequencyOfWatering;
+    }
+
+    @Override
+    public String toString() {
+        return    name + '\t' +
+                " - poznámka: '" + notes + '\'' +
+                " ,vysazena: " + planted +
+                " ,poslední zálivka: " + watering +
+                " ,frekvence zálivky: " + frequencyOfWatering + " dny"+'}'+
+                '\n';
     }
 }
 
