@@ -1,5 +1,6 @@
 import java.time.LocalDate;
-import java.util.List;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 
 public class Main {
     public static final String FILENAME = "kvetiny.txt";
@@ -23,6 +24,24 @@ public class Main {
         List<Plant>plants = register.getPlants();
         System.out.println(plants);
 
+
+        System.out.println("ŘAZENÍ ROSTLIN:");
+        // plants.sort(Comparator.reverseOrder());
+        // plants.sort(Plant::compareTo);
+        Collections.sort(plants);
+        plants.forEach(c -> System.out.println(c.getName()));
+        Collections.sort(plants, new PlantComparator());
+        plants.forEach(c -> System.out.println(c.getWatering()+" "+c.getName()));
+
+        System.out.println("ANALÝZA:");
+        Set<Plant> plantSet = new HashSet<>(plants);
+        System.out.println("* Kdy byli vysazeny nějaké květiny:");
+        plantSet.forEach(plant -> System.out.println(plant.getPlanted()+" "+plant.getName()));
+
+        System.out.println("Byla nějaká rostlina vysazena v posledním měsíci?");
+        for (Plant plant: register.plantList){
+            System.out.println(plant.datePlantedInThisMonth());
+        }
 
 
     }

@@ -51,9 +51,9 @@ public class RegisterOfPlants {
         }catch (FileNotFoundException e) {
             throw new PlantException("Nepodařilo se najít soubor "+fileName+": "+e.getLocalizedMessage());
         }catch (NumberFormatException e) {
-            throw new PlantException("Nesprávný formát frekvence zálivky na řádku: "+lineNumber+" Zadejte celé číslo ve dnech." );
+            throw new PlantException("Nesprávný formát frekvence zálivky na řádku: "+lineNumber+" Zadejte celé číslo ve dnech."+e.getLocalizedMessage() );
         }catch (DateTimeException e){
-            throw new PlantException("Nesprávný formát data na řádku: "+lineNumber);
+            throw new PlantException("Nesprávný formát data na řádku: "+lineNumber+e.getLocalizedMessage());
         }
 
         }
